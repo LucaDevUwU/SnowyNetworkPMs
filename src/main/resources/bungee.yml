@@ -1,0 +1,4 @@
+name: SnowyNetworkPMs
+version: '${version}'
+main: com.snowy.snowynetworkpms.SnowyNetworkPMs
+description: Network wide PMs
