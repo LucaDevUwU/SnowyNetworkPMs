@@ -6,8 +6,12 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.api.plugin.TabExecutor;
 
-public class MessageCommand extends Command {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MessageCommand extends Command implements TabExecutor {
     private SnowyNetworkPMs network;
     public MessageCommand(SnowyNetworkPMs network) {
         super("msg");
@@ -38,5 +42,16 @@ public class MessageCommand extends Command {
                 player.sendMessage(ChatColor.RED + "Invalid usage! Please use /msg <player> <message>.");
             }
         }
+    }
+
+    @Override
+    public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
+        List<String> results = new ArrayList<>();
+        if (args.length == 1) {
+            for (ProxiedPlayer player : ProxyServer.getInstance().getPlayers()) {
+                results.add(player.getName());
+            }
+        }
+        return results;
     }
 }

@@ -2,6 +2,7 @@ package com.snowy.snowynetworkpms;
 
 import com.snowy.snowynetworkpms.command.MessageCommand;
 import com.snowy.snowynetworkpms.command.ReplyCommand;
+import com.snowy.snowynetworkpms.listener.NetworkListener;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 
@@ -15,6 +16,8 @@ public final class SnowyNetworkPMs extends Plugin {
     public void onEnable() {
         ProxyServer.getInstance().getPluginManager().registerCommand(this, new MessageCommand(this));
         ProxyServer.getInstance().getPluginManager().registerCommand(this, new ReplyCommand(this));
+
+        ProxyServer.getInstance().getPluginManager().registerListener(this, new NetworkListener(this));
 
         recentMessages = new HashMap<>();
     }
